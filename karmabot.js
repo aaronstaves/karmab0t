@@ -5,17 +5,19 @@ db.run('CREATE TABLE IF NOT EXISTS "karma" ("amount" INTEGER, "who" TEXT, "chann
 });
 var request = require('request');
 var channels=[
-	"#groupcard",
-	"#mkedev"
+	//add channels here
 ];
 
 var names=[];
 
 var irc = require('irc');
+// change port and connect settings here
 var client = new irc.Client('chat.freenode.net','KarmaB0t',{
 	userName: 'KarmaB0t',
 	realName: 'KarmaB0t',
 	floodProtection: true,
+	port: 6667,
+	channels: channels,
 	floodProtectionDelay: 250
 });
 
@@ -45,6 +47,7 @@ var statsKarma = function(channel, callback){
 	});
 };
 
+/*
 client.addListener('notice', function (nick, to, text, message){
 	if(nick && text && nick.toLowerCase()=="nickserv" && text.match(/This nickname is registered/)){
 		client.say('NickServ','identify PASSWORD');
@@ -54,6 +57,7 @@ client.addListener('notice', function (nick, to, text, message){
 		}
 	}
 });
+*/
 
 client.addListener('names', function(channel, nicks){
 	var tmp = [];
